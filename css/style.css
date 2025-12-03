@@ -1,32 +1,84 @@
 
+/* === Basis & Typografie === */
+:root {
+  --brand: #4CAF50;
+  --text: #333;
+  --muted: #666;
+  --bg: #f5f5f5;
+  --border: #e5e5e5;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #333;
+  color: var(--text);
+  line-height: 1.6;
+  background: #fff;
 }
 
+h1, h2, h3 {
+  line-height: 1.25;
+  margin: 0 0 0.5em;
+}
+h1 {
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+}
+h2 {
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+}
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+}
+a:hover, .site-nav a:hover {
+  text-decoration: underline;
+}
+
+/* === Layout === */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* Gleiches Innenlayout für Header & Footer */
 .site-header {
+  background: var(--bg);
+  border-bottom: 3px solid var(--brand);
+}
+.header-inner,
+.footer-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #f5f5f5;
-  padding: 10px 20px;
-  border-bottom: 3px solid #4CAF50;
+  justify-content: space-between;
+  gap: 16px;
 }
 
+/* Brand */
 .brand {
   font-size: 1.5em;
   font-weight: bold;
-  color: #4CAF50;
-  text-decoration: none;
+  color: var(--brand);
 }
 
-.partner-logo {
-  height: 40px;
-  margin-left: 10px;
-}
-
+/* Navigation */
 .site-nav ul {
   list-style: none;
   display: flex;
@@ -34,48 +86,167 @@ body {
   margin: 0;
   padding: 0;
 }
-
 .site-nav a {
   text-decoration: none;
-  color: #333;
+  color: var(--text);
   font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 6px;
 }
-
 .site-nav a.active {
-  color: #4CAF50;
+  color: var(--brand);
+  background: #eaf7ea;
 }
 
+/* Mobile Toggle */
 .nav-toggle {
   display: none;
   font-size: 1.5em;
   background: none;
-  border: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 0 15px;
+/* === Seiten-Content === */
+.content {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 24px;
 }
 
+/* Hero-Bereich (optional) */
+.page-hero {
+  background: linear-gradient(0deg, #ffffff 0%, #f8fff8 100%);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 32px 24px;
+  margin-bottom: 20px;
+}
+.page-hero p {
+  color: var(--muted);
+}
+
+/* Abschnittsüberschriften */
+.section {
+  margin-top: 24px;
+}
+.section h2 {
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+/* Karten & Grids für About/Objectives/Results/Team */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+.card h3 {
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+.card p {
+  color: var(--text);
+}
+
+/* Team-Karten */
+.team-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.team-card img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+
+/* === News (dein bestehendes, leicht verfeinert) === */
 .news-list {
   margin-top: 20px;
 }
-
 .news-item {
+  display: block;
+  gap: 15px;
   border-bottom: 1px solid #ddd;
   padding: 15px 0;
 }
-
-.news-item h3 {
-  margin: 0 0 5px;
-  color: #4CAF50;
+.news-image {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
-
-.news-item time {
+.news-content time {
   font-size: 0.9em;
-  color: #666;
+  color: var(--muted);
+}
+.news-content h3 {
+  margin: 5px 0;
+  font-size: 1.2em;
+  color: var(--brand);
 }
 
+/* Footer */
 .site-footer {
   background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+/* === Responsive === */
+@media (max-width: 992px) {
+  .grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .header-inner {
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    display: block;
+    order: 2;
+  }
+  .site-nav {
+    width: 100%;
+    order: 3;
+  }
+  .site-nav ul {
+    display: none;
+    flex-direction: column;
+    background: var(--bg);
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .site-nav.open ul {
+    display: flex;
+  }
+  .news-item {
+    flex-direction: column;
+  }
+  .news-image {
+    width: 100%;
+  }
+  .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
+}
