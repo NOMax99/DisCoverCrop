@@ -7,6 +7,9 @@
   --bg: #f5f5f5;
   --border: #e5e5e5;
   --shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+  /* Partner-Logos: gemeinsame Zielgröße (orientiert an Logo4) */
+  --partner-logo-size: 44px;
 }
 
 html {
@@ -58,6 +61,60 @@ a:hover, .site-nav a:hover {
   padding: 0 15px;
 }
 
+/* Brand-Top: eigenes Element oberhalb der Navigation */
+.brand-top {
+  background: transparent;
+}
+.brand-top .brand-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Haupt-Logo links, Partner-Logos rechts */
+  padding-top: 12px;
+  padding-bottom: 6px;
+}
+
+/* Link um das Logo */
+.brand-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Logo: Hauptlogo größer, skaliert */
+.brand-link .logo,
+.logo {
+  height: 88px; /* Desktop-Größe, anpassbar */
+  width: auto;
+  display: block;
+}
+
+/* Partner-Logos: rechts, gleich groß (orientiert an Logo4) */
+.partner-logos {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: nowrap;
+}
+.partner {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Alle Partner-Logos verwenden dieselbe Höhe -- gleich zu Logo4 */
+.partner-logo {
+  height: var(--partner-logo-size);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  opacity: 0.95;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+/* kleine hover-Animation (optional) */
+.partner-logo:hover {
+  transform: translateY(-3px) scale(1.03);
+  opacity: 1;
+}
+
 /* Gleiches Innenlayout für Header & Footer */
 .site-header {
   background: var(--bg);
@@ -71,7 +128,7 @@ a:hover, .site-nav a:hover {
   gap: 16px;
 }
 
-/* Brand */
+/* Brand (Fallback-Text, bleibt sichtbar falls Logo fehlt) */
 .brand {
   font-size: 1.5em;
   font-weight: bold;
@@ -180,7 +237,7 @@ a:hover, .site-nav a:hover {
   border: 2px solid var(--border);
 }
 
-/* === News (dein bestehendes, leicht verfeinert) === */
+/* === News === */
 .news-list {
   margin-top: 20px;
 }
@@ -215,7 +272,27 @@ a:hover, .site-nav a:hover {
   margin-top: 30px;
 }
 
-/* === Responsive === */
+/* --- Responsive Anpassungen für Brand & Header --- */
+@media (max-width: 1100px) {
+  .brand-link .logo, .logo { height: 72px; }
+  /* Partner-Logos proportional verkleinern */
+  :root { --partner-logo-size: 40px; }
+  .partner-logo { height: var(--partner-logo-size); }
+}
+
+@media (max-width: 768px) {
+  .brand-link .logo, .logo { height: 64px; }
+  :root { --partner-logo-size: 36px; }
+  .partner-logo { height: var(--partner-logo-size); }
+  .partner-logos { gap: 10px; }
+}
+
+@media (max-width: 480px) {
+  /* Auf sehr kleinen Bildschirmen die Partner-Logos ausblenden (kann geändert werden) */
+  .partner-logos { display: none; }
+}
+
+/* === Responsive allgemein === */
 @media (max-width: 992px) {
   .grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
 }
